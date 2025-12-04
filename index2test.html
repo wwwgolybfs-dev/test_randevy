@@ -8,464 +8,133 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Roboto', sans-serif;
-            color: #333;
-            line-height: 1.6;
-            background-color: #f9f9f9;
-            overflow-x: hidden;
-        }
-        
-        h1, h2, h3, h4 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 600;
-            color: #2c5530;
-            margin-bottom: 1rem;
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', sans-serif; color: #333; line-height: 1.6; background-color: #f9f9f9; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 600; color: #2c5530; margin-bottom: 1rem; }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+
         /* Header */
-        header {
-            background-color: #fff;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-            flex-wrap: wrap;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo i {
-            font-size: 2.2rem;
-            color: #4a7c59;
-            margin-right: 10px;
-        }
-        
-        .logo h1 {
-            font-size: 1.7rem;
-            margin-bottom: 0;
-        }
-        
-        .logo p {
-            font-size: 0.85rem;
-            color: #666;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-            flex-wrap: wrap;
-        }
-        
-        nav ul li {
-            margin-left: 25px;
-        }
-        
-        nav ul li a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s;
-            position: relative;
-        }
-        
-        nav ul li a:hover {
-            color: #4a7c59;
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.6rem;
-            color: #4a7c59;
-            cursor: pointer;
-        }
+        header { background-color: #fff; box-shadow: 0 2px 15px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; flex-wrap: wrap; }
+        .logo { display: flex; align-items: center; }
+        .logo i { font-size: 2.2rem; color: #4a7c59; margin-right: 10px; }
+        .logo h1 { font-size: 1.7rem; margin: 0; }
+        .logo p { font-size: 0.85rem; color: #666; }
+        nav ul { display: flex; list-style: none; flex-wrap: wrap; }
+        nav ul li { margin-left: 25px; }
+        nav ul li a { text-decoration: none; color: #333; font-weight: 500; transition: color 0.3s; }
+        nav ul li a:hover { color: #4a7c59; }
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.6rem; color: #4a7c59; cursor: pointer; }
 
-        /* Соцсети в шапке */
-        .social-header {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
+        /* Соцсети */
+        .social-header { display: flex; gap: 12px; align-items: center; }
+        .social-header a { color: #4a7c59; font-size: 1.4rem; position: relative; transition: all 0.3s; }
+        .social-header a:hover { color: #2c5530; transform: translateY(-2px); }
+        .tooltip { visibility: hidden; position: absolute; background: #2c5530; color: white; padding: 5px 10px; border-radius: 4px; font-size: 0.8rem; bottom: -30px; left: 50%; transform: translateX(-50%); white-space: nowrap; opacity: 0; transition: opacity 0.3s; z-index: 10; }
+        .social-header a:hover .tooltip { visibility: visible; opacity: 1; }
 
-        .social-header a {
-            color: #4a7c59;
-            font-size: 1.4rem;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .social-header a:hover {
-            color: #2c5530;
-            transform: translateY(-2px);
-        }
-
-        .tooltip {
-            visibility: hidden;
-            position: absolute;
-            background: #2c5530;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            bottom: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: 10;
-        }
-
-        .social-header a:hover .tooltip {
-            visibility: visible;
-            opacity: 1;
-        }
-        
         /* Hero */
-        .hero {
-            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            background-position: center;
-            padding: 100px 0;
-            text-align: center;
-        }
-        
-        .hero h2 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            color: #2c5530;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 30px;
-            color: #555;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: #4a7c59;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn:hover {
-            background-color: #3a6548;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
+        .hero { background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center; padding: 100px 0; text-align: center; }
+        .hero h2 { font-size: 2.8rem; margin-bottom: 20px; color: #2c5530; }
+        .hero p { font-size: 1.2rem; max-width: 800px; margin: 0 auto 30px; color: #555; }
+        .btn { display: inline-block; background-color: #4a7c59; color: white; padding: 12px 30px; border-radius: 30px; text-decoration: none; font-weight: 500; transition: all 0.3s ease; border: none; cursor: pointer; font-size: 1rem; }
+        .btn:hover { background-color: #3a6548; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 
-        .btn-whatsapp {
-            background-color: #25D366;
-        }
+        /* Sections */
+        section { padding: 80px 0; }
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { font-size: 2.5rem; position: relative; display: inline-block; padding-bottom: 15px; }
+        .section-title h2:after { content: ''; position: absolute; width: 70px; height: 3px; background-color: #4a7c59; bottom: 0; left: 50%; transform: translateX(-50%); }
 
-        .btn-telegram {
-            background-color: #0088cc;
-        }
+        /* About */
+        .about-content { display: flex; align-items: center; gap: 50px; }
+        .about-img { flex: 1; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .about-img img { width: 100%; height: auto; display: block; }
+        .about-text { flex: 1; }
+        .about-text h3 { font-size: 1.8rem; margin-bottom: 20px; }
+        .about-text p { margin-bottom: 20px; color: #555; }
 
-        .btn-instagram {
-            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-        }
+        /* Specializations */
+        .specializations { background-color: #f0f5f1; }
+        .spec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .spec-card { background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease; }
+        .spec-card:hover { transform: translateY(-10px); }
+        .spec-card i { font-size: 2.5rem; color: #4a7c59; margin-bottom: 20px; }
+        .spec-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
 
-        .btn-vk {
-            background-color: #4a76a8;
-        }
-        
-        /* Section */
-        section {
-            padding: 80px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .section-title h2 {
-            font-size: 2.5rem;
-            position: relative;
-            display: inline-block;
-            padding-bottom: 15px;
-        }
-        
-        .section-title h2:after {
-            content: '';
-            position: absolute;
-            width: 70px;
-            height: 3px;
-            background-color: #4a7c59;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
+        /* Methods */
+        .methods-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .method-card { background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-top: 4px solid #4a7c59; }
+        .method-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+
+        /* Snoring */
+        .snoring { background-color: #f0f5f1; }
+        .myth-card { background-color: white; padding: 30px; border-radius: 10px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .myth-card h3 { color: #4a7c59; margin-bottom: 15px; }
+        .myth-card p { margin-bottom: 15px; }
+        .benefits-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 40px; }
+        .benefit-item { background-color: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .benefit-item i { font-size: 2rem; color: #4a7c59; margin-bottom: 15px; }
 
         /* Reviews */
-        .reviews {
-            background-color: #f0f5f1;
-        }
-
-        .review-form {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            max-width: 600px;
-            margin: 0 auto 40px;
-        }
-
-        .review-form input, .review-form textarea {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-family: inherit;
-        }
-
-        .review-form button {
-            background: #4a7c59;
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-        }
-
-        .review-form button:hover {
-            background: #3a6548;
-        }
-
-        .reviews-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .review-card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
-            border-left: 4px solid #4a7c59;
-        }
-
-        .review-card h4 {
-            margin-bottom: 8px;
-            color: #4a7c59;
-        }
-
-        .review-card small {
-            color: #888;
-            font-size: 0.8rem;
-        }
+        .reviews { background-color: #f0f5f1; }
+        .review-form { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); max-width: 600px; margin: 0 auto 40px; }
+        .review-form input, .review-form textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; }
+        .review-form button { background: #4a7c59; color: white; padding: 12px 25px; border: none; border-radius: 8px; cursor: pointer; font-weight: 500; }
+        .review-form button:hover { background: #3a6548; }
+        .reviews-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 30px; }
+        .review-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 3px 15px rgba(0,0,0,0.05); border-left: 4px solid #4a7c59; }
+        .review-card h4 { margin-bottom: 8px; color: #4a7c59; }
+        .review-card small { color: #888; font-size: 0.8rem; }
 
         /* Map */
-        .map-container {
-            height: 400px;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            margin-top: 30px;
-        }
+        .map-container { height: 400px; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.1); margin: 30px 0; }
 
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.6);
-            animation: fadeIn 0.3s;
-        }
-
-        .modal-content {
-            background-color: white;
-            margin: 10% auto;
-            padding: 30px;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 500px;
-            position: relative;
-            animation: slideIn 0.4s;
-        }
-
-        .close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 1.8rem;
-            color: #aaa;
-            cursor: pointer;
-        }
-
-        .close:hover {
-            color: #000;
-        }
-
-        /* Back to top */
-        #backToTop {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #4a7c59;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-            z-index: 1000;
-            transition: all 0.3s;
-        }
-
-        #backToTop:hover {
-            background: #3a6548;
-            transform: translateY(-3px);
-        }
+        /* CTA */
+        .cta { background: linear-gradient(rgba(74,124,89,0.9), rgba(74,124,89,0.9)), url('https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center; color: white; text-align: center; padding: 100px 0; }
+        .cta h2 { color: white; font-size: 2.5rem; margin-bottom: 20px; }
+        .cta p { font-size: 1.2rem; max-width: 800px; margin: 0 auto 40px; }
+        .cta .btn { background-color: white; color: #4a7c59; }
+        .cta .btn:hover { background-color: #f0f5f1; }
 
         /* Footer */
-        footer {
-            background-color: #2c5530;
-            color: white;
-            padding: 60px 0 30px;
-        }
+        footer { background-color: #2c5530; color: white; padding: 60px 0 30px; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-column h3 { color: white; font-size: 1.5rem; margin-bottom: 20px; }
+        .social-footer { display: flex; gap: 15px; margin-top: 15px; }
+        .social-footer a { color: #9bc19b; font-size: 1.5rem; transition: all 0.3s; }
+        .social-footer a:hover { color: white; transform: translateY(-3px); }
 
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
+        /* Modal */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); animation: fadeIn 0.3s; }
+        .modal-content { background-color: white; margin: 10% auto; padding: 30px; border-radius: 12px; width: 90%; max-width: 500px; position: relative; animation: slideIn 0.4s; }
+        .close { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; color: #aaa; cursor: pointer; }
+        .close:hover { color: #000; }
 
-        .footer-column h3 {
-            color: white;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-
-        .social-footer {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .social-footer a {
-            color: #9bc19b;
-            font-size: 1.5rem;
-            transition: all 0.3s;
-        }
-
-        .social-footer a:hover {
-            color: white;
-            transform: translateY(-3px);
-        }
-
-        /* Анимации */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
+        /* Back to top */
+        #backToTop { position: fixed; bottom: 30px; right: 30px; background: #4a7c59; color: white; width: 50px; height: 50px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 1.5rem; cursor: pointer; box-shadow: 0 3px 10px rgba(0,0,0,0.2); z-index: 1000; transition: all 0.3s; }
+        #backToTop:hover { background: #3a6548; transform: translateY(-3px); }
 
         /* Responsive */
-        @media (max-width: 992px) {
-            .about-content {
-                flex-direction: column;
-            }
-        }
-        
+        @media (max-width: 992px) { .about-content { flex-direction: column; } }
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            nav {
-                margin-top: 15px;
-                width: 100%;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            nav ul li {
-                margin: 8px 0;
-            }
-
-            .social-header {
-                margin-top: 15px;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-                position: absolute;
-                right: 20px;
-                top: 20px;
-            }
-
-            .hero h2 {
-                font-size: 2.2rem;
-            }
+            .header-content { flex-direction: column; text-align: center; }
+            nav { margin-top: 15px; width: 100%; }
+            nav ul { flex-direction: column; align-items: center; }
+            nav ul li { margin: 8px 0; }
+            .social-header { margin-top: 15px; }
+            .mobile-menu-btn { display: block; position: absolute; right: 20px; top: 20px; }
+            .hero h2 { font-size: 2.2rem; }
         }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideIn { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     </style>
 </head>
 <body>
 
     <!-- Back to Top -->
-    <div id="backToTop">
-        <i class="fas fa-arrow-up"></i>
-    </div>
+    <div id="backToTop"><i class="fas fa-arrow-up"></i></div>
 
     <!-- Header -->
     <header>
@@ -475,31 +144,26 @@
                     <i class="fas fa-spa"></i>
                     <div>
                         <h1>София Маркинцевич</h1>
-                        <p>Остеопат, биоэнергетик</p>
+                        <p>Остеопат, биоэнергетик, специалист по восстановлению здоровья</p>
                     </div>
                 </div>
-                
                 <nav>
                     <ul>
                         <li><a href="#about">Обо мне</a></li>
                         <li><a href="#specializations">Специализации</a></li>
                         <li><a href="#methods">Методы</a></li>
-                        <li><a href="#snoring">Храп</a></li>
+                        <li><a href="#snoring">Остеопатия и храп</a></li>
                         <li><a href="#reviews">Отзывы</a></li>
                         <li><a href="#contact">Контакты</a></li>
                     </ul>
                 </nav>
-
                 <div class="social-header">
                     <a href="https://t.me/your_telegram" target="_blank"><i class="fab fa-telegram-plane"></i><span class="tooltip">Telegram</span></a>
                     <a href="https://wa.me/79991234567" target="_blank"><i class="fab fa-whatsapp"></i><span class="tooltip">WhatsApp</span></a>
                     <a href="https://instagram.com/your_instagram" target="_blank"><i class="fab fa-instagram"></i><span class="tooltip">Instagram</span></a>
                     <a href="https://vk.com/your_vk" target="_blank"><i class="fab fa-vk"></i><span class="tooltip">ВКонтакте</span></a>
                 </div>
-                
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
             </div>
         </div>
     </header>
@@ -508,26 +172,25 @@
     <section class="hero" data-aos="fade-up">
         <div class="container">
             <h2>Восстановление здоровья через тело и энергию</h2>
-            <p>Избавьтесь от боли, восстановите гармонию, раскройте внутренние ресурсы организма.</p>
-            <button class="btn" onclick="openModal()">Записаться на приём</button>
+            <p>Я помогаю избавиться от острых и хронических болей, восстановить гармонию тела и души, а также раскрыть внутренние ресурсы организма для самоисцеления.</p>
+            <button class="btn" onclick="openModal()">Записаться на консультацию</button>
         </div>
     </section>
 
     <!-- About -->
     <section id="about" data-aos="fade-up">
         <div class="container">
-            <div class="section-title">
-                <h2>Обо мне</h2>
-            </div>
+            <div class="section-title"><h2>Обо мне</h2></div>
             <div class="about-content">
                 <div class="about-img" data-aos="fade-right">
                     <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="София Маркинцевич">
                 </div>
                 <div class="about-text" data-aos="fade-left">
-                    <h3>София Маркинцевич</h3>
-                    <p>Эксперт в остеопатии, биоэнергетике и кинезиомассаже. Более 10 лет помогаю людям возвращать здоровье естественным путём.</p>
-                    <p>Мой подход: тело, эмоции и энергия — единая система. Я нахожу первопричину и помогаю организму исцелиться.</p>
-                    <p>Авторская методика «Многоуровневый релиз» + израильская остеопатия = устойчивый результат.</p>
+                    <h3>София Маркинцевич: эксперт в области остеопатии, биоэнергетики и кинезиомассажа</h3>
+                    <p>Я работаю с теми, кто ищет не только избавления от боли, но и глубинных изменений в своём состоянии — физическом, эмоциональном и энергетическом.</p>
+                    <p>Мой подход основан на сочетании науки и тонкого восприятия: остеопатия, биоэнергетика и авторская методика «Многоуровневый релиз» позволяют мне находить первопричину проблемы и помогать организму восстановиться естественным образом.</p>
+                    <p>Более 10 лет опыта работы в области остеопатии и биоэнергетики, индивидуальный подход к каждому пациенту и уникальная способность быстро находить первопричину проблемы — вот что помогает мне достигать реальных результатов.</p>
+                    <p>Я рассматриваю человека как единую систему, где тело, эмоции и энергия тесно связаны. Моя цель — помочь вам не только устранить боль, но и вернуть радость движения и жизни!</p>
                 </div>
             </div>
         </div>
@@ -536,30 +199,12 @@
     <!-- Specializations -->
     <section id="specializations" class="specializations" data-aos="fade-up">
         <div class="container">
-            <div class="section-title">
-                <h2>Специализации</h2>
-            </div>
+            <div class="section-title"><h2>Мои специализации</h2></div>
             <div class="spec-grid">
-                <div class="spec-card" data-aos="zoom-in">
-                    <i class="fas fa-bone"></i>
-                    <h3>Боли</h3>
-                    <p>Спина, шея, суставы, мышцы</p>
-                </div>
-                <div class="spec-card" data-aos="zoom-in" data-aos-delay="100">
-                    <i class="fas fa-user-injured"></i>
-                    <h3>Травмы</h3>
-                    <p>После операций, стрессов</p>
-                </div>
-                <div class="spec-card" data-aos="zoom-in" data-aos-delay="200">
-                    <i class="fas fa-brain"></i>
-                    <h3>Эмоции</h3>
-                    <p>Тревога, бессонница</p>
-                </div>
-                <div class="spec-card" data-aos="zoom-in" data-aos-delay="300">
-                    <i class="fas fa-balance-scale"></i>
-                    <h3>Баланс</h3>
-                    <p>Биомеханика и энергия</p>
-                </div>
+                <div class="spec-card" data-aos="zoom-in"><i class="fas fa-bone"></i><h3>Лечение болей</h3><p>Лечение болей в спине, шее, суставах и мышцах. Освобождение тела от острых и хронических болей.</p></div>
+                <div class="spec-card" data-aos="zoom-in" data-aos-delay="100"><i class="fas fa-user-injured"></i><h3>Последствия травм и стрессов</h3><p>Работа с последствиями травм, операций и стрессов. Помощь в восстановлении после сложных периодов.</p></div>
+                <div class="spec-card" data-aos="zoom-in" data-aos-delay="200"><i class="fas fa-brain"></i><h3>Эмоциональное состояние</h3><p>Помощь при тревожных состояниях, бессоннице и усталости. Выстраивание связи между физическим и эмоциональным состоянием.</p></div>
+                <div class="spec-card" data-aos="zoom-in" data-aos-delay="300"><i class="fas fa-balance-scale"></i><h3>Восстановление баланса</h3><p>Улучшение общего состояния через восстановление биомеханики тела и энергобаланса. Гармонизация работы организма.</p></div>
             </div>
         </div>
     </section>
@@ -567,22 +212,11 @@
     <!-- Methods -->
     <section id="methods" data-aos="fade-up">
         <div class="container">
-            <div class="section-title">
-                <h2>Методы</h2>
-            </div>
+            <div class="section-title"><h2>Мои уникальные методы</h2></div>
             <div class="methods-grid">
-                <div class="method-card" data-aos="fade-up">
-                    <h3>Многоуровневый релиз</h3>
-                    <p>Глубокая проработка тела и энергии</p>
-                </div>
-                <div class="method-card" data-aos="fade-up" data-aos-delay="100">
-                    <h3>Кинезиология</h3>
-                    <p>Точное выявление причин</p>
-                </div>
-                <div class="method-card" data-aos="fade-up" data-aos-delay="200">
-                    <h3>Остеопатия + психосоматика</h3>
-                    <p>Целостный подход</p>
-                </div>
+                <div class="method-card" data-aos="fade-up"><h3>Авторская методика «Многоуровневый релиз»</h3><p>Для проработки глубоких слоёв тела, включая энергетические и жидкостные уровни. Помогает глубинно проработать напряжение и восстановить естественный баланс организма.</p></div>
+                <div class="method-card" data-aos="fade-up" data-aos-delay="100"><h3>Кинезиологическое тестирование</h3><p>Точно выявляет, где и почему возникла проблема. Позволяет найти первопричину боли или дисбаланса в организме.</p></div>
+                <div class="method-card" data-aos="fade-up" data-aos-delay="200"><h3>Сочетание остеопатии, кинезиологии и психосоматики</h3><p>Массаж с элементами остеопатии устраняет мышечные зажимы и дисбаланс. Целостный подход к здоровью человека.</p></div>
             </div>
         </div>
     </section>
@@ -590,21 +224,110 @@
     <!-- Snoring -->
     <section id="snoring" class="snoring" data-aos="fade-up">
         <div class="container">
-            <div class="section-title">
-                <h2>Остеопатия против храпа</h2>
-            </div>
+            <div class="section-title"><h2>Остеопатия против храпа</h2><p>Скажите «да» глубокому сну и спокойным ночам</p></div>
             <div class="myth-card" data-aos="fade-up">
-                <h3>Миф: остеопаты не лечат храп</h3>
-                <p>95% пациентов замечают улучшение после 1 сеанса!</p>
+                <h3>Миф 1: «Остеопаты не лечат храп»</h3>
+                <p>Звучит привычно? Но дело в том, что храп и апноэ — это не столько про дыхание, сколько про напряжение, мышечный дисбаланс и даже неправильное положение костей.</p>
+                <p>Используя Израильскую методику остеопатии с элементами кинезиологического массажа, я воздействую на первопричины:</p>
+                <ul>
+                    <li>Налаживаю тонус мышц, поддерживающих дыхательные пути</li>
+                    <li>Восстанавливаю баланс, устраняя спазмы в шее и грудной клетке</li>
+                    <li>Помогаю воздуху циркулировать свободно, чтобы ваше тело снова дышало легко</li>
+                </ul>
+                <p>95% пациентов замечают улучшение уже после первого сеанса. Храп уменьшается, дыхание становится ровным, а ваши ночи — тихими.</p>
             </div>
-            <!-- Остальные мифы опущены для краткости, но оставь как было -->
+            <div class="myth-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Миф 2: «Остеопаты лечат только суставы»</h3>
+                <p>Остеопатия — это не просто о боли в спине и суставах. Это про весь организм.</p>
+                <p>Когда вы храпите, это не просто «особенность сна». Это сложная цепочка: от напряжения в шейных мышцах до плохой циркуляции крови и лимфы.</p>
+                <p>Именно поэтому остеопатический подход помогает:</p>
+                <ul>
+                    <li>Улучшить положение костей черепа и шеи, что снимает давление с дыхательных путей</li>
+                    <li>Восстановить тонус мышц глотки и мягкого неба</li>
+                    <li>Гармонизировать работу всей дыхательной системы, чтобы вы снова начали наслаждаться сном</li>
+                </ul>
+            </div>
+            <div class="myth-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>Миф 3: «Лечение у остеопатов слишком дорого»</h3>
+                <p>Кажется, что это дорого? А теперь задумайтесь: сколько стоит ваше здоровье?</p>
+                <p>Если храп и апноэ остаются без внимания, вы рискуете:</p>
+                <ul>
+                    <li>Постоянно тратить деньги на бессмысленные пластыри, спреи или гаджеты, которые дают лишь временный эффект</li>
+                    <li>Страдать от усталости, которая мешает жить и работать</li>
+                    <li>Столкнуться с серьезными проблемами, например, сердечно-сосудистыми заболеваниями, вызванными нехваткой кислорода</li>
+                </ul>
+                <p>Остеопатия — это инвестиция в долгосрочный результат. Уже после одного сеанса вы почувствуете разницу. А постоянные траты на временные решения останутся в прошлом.</p>
+            </div>
+            <div class="section-title" style="margin-top: 60px;"><h3>Что вы получите от лечения?</h3></div>
+            <div class="benefits-list">
+                <div class="benefit-item" data-aos="zoom-in"><i class="fas fa-bed"></i><h4>Глубокий сон</h4><p>Спокойные ночи без храпа и пробуждений</p></div>
+                <div class="benefit-item" data-aos="zoom-in" data-aos-delay="100"><i class="fas fa-heartbeat"></i><h4>Здоровье сердца</h4><p>Снижение нагрузки на сердечно-сосудистую систему</p></div>
+                <div class="benefit-item" data-aos="zoom-in" data-aos-delay="200"><i class="fas fa-sun"></i><h4>Бодрость днём</h4><p>Энергия и хорошее самочувствие в течение дня</p></div>
+                <div class="benefit-item" data-aos="zoom-in" data-aos-delay="300"><i class="fas fa-wind"></i><h4>Свободное дыхание</h4><p>Лёгкость дыхания во время сна и бодрствования</p></div>
+            </div>
         </div>
     </section>
 
     <!-- Reviews -->
     <section id="reviews" class="reviews" data-aos="fade-up">
         <div class="container">
-2025 София Маркинцевич. Все права защищены.
+            <div class="section-title"><h2>Отзывы пациентов</h2></div>
+            <div class="review-form">
+                <h3>Оставьте свой отзыв</h3>
+                <form id="reviewForm">
+                    <input type="text" id="reviewName" placeholder="Ваше имя" required>
+                    <textarea id="reviewText" placeholder="Ваш отзыв" rows="4" required></textarea>
+                    <button type="submit">Отправить</button>
+                </form>
+            </div>
+            <div id="reviewsList" class="reviews-list"></div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" data-aos="fade-up">
+        <div class="container">
+            <h2>Приглашаю вас на консультацию</h2>
+            <p>Вместе мы найдём путь к вашему здоровью и благополучию! Начните путь к новому состоянию уже сегодня.</p>
+            <button class="btn" onclick="openModal()">Записаться на приём</button>
+        </div>
+    </section>
+
+    <!-- Footer + Map -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>София Маркинцевич</h3>
+                    <p>Эксперт в области остеопатии, биоэнергетики и кинезиомассажа. Помогаю восстановить гармонию тела и души.</p>
+                    <div class="contact-info">
+                        <div><i class="fas fa-phone"></i> +7 (XXX) XXX-XX-XX</div>
+                        <div><i class="fas fa-envelope"></i> example@email.com</div>
+                        <div><i class="fas fa-map-marker-alt"></i> Ваш город, ул. Примерная, д. 1</div>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Что я могу для вас сделать</h3>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Освободить тело от болей</li>
+                        <li><i class="fas fa-check-circle"></i> Восстановление после травм</li>
+                        <li><i class="fas fa-check-circle"></i> Работа с тревогой и бессонницей</li>
+                        <li><i class="fas fa-check-circle"></i> Целостный подход к здоровью</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Социальные сети</h3>
+                    <div class="social-footer">
+                        <a href="https://t.me/your_telegram" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+                        <a href="https://wa.me/79991234567" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://instagram.com/your_instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://vk.com/your_vk" target="_blank"><i class="fab fa-vk"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="map-container" id="yandexMap"></div>
+            <div class="copyright">
+                <p>&copy; 2025 София Маркинцевич. Все права защищены.</p>
             </div>
         </div>
     </footer>
@@ -619,7 +342,7 @@
                 <input type="text" placeholder="Ваше имя" required>
                 <input type="tel" placeholder="Телефон" required>
                 <textarea placeholder="Жалобы или пожелания" rows="3"></textarea>
-                <button type="submit" class="btn">Отправить</button>
+                <button type="submit" class="btn">Отправить в Telegram</button>
             </form>
         </div>
     </div>
@@ -641,9 +364,7 @@
                 e.preventDefault();
                 const target = document.querySelector(link.getAttribute('href'));
                 window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
-                if (window.innerWidth <= 768) {
-                    document.querySelector('nav ul').classList.remove('show');
-                }
+                if (window.innerWidth <= 768) document.querySelector('nav ul').classList.remove('show');
             });
         });
 
@@ -652,25 +373,43 @@
         window.addEventListener('scroll', () => {
             backToTop.style.display = window.scrollY > 300 ? 'flex' : 'none';
         });
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
         // Modal
-        function openModal() {
-            document.getElementById('bookingModal').style.display = 'block';
-        }
-        function closeModal() {
-            document.getElementById('bookingModal').style.display = 'none';
-        }
-        window.onclick = function(e) {
-            if (e.target.classList.contains('modal')) closeModal();
-        }
+        function openModal() { document.getElementById('bookingModal').style.display = 'block'; }
+        function closeModal() { document.getElementById('bookingModal').style.display = 'none'; }
+        window.onclick = e => { if (e.target.classList.contains('modal')) closeModal(); };
 
-        // Reviews
+        // === ОТПРАВКА В TELEGRAM ===
+        const TELEGRAM_BOT_TOKEN = 'ВАШ_ТОКЕН_БОТА'; // ← Замени!
+        const TELEGRAM_CHAT_ID = 'ВАШ_CHAT_ID';       // ← Замени!
+
+        document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const name = this[0].value;
+            const phone = this[1].value;
+            const message = this[2].value;
+
+            const text = `Новая заявка!\n\nИмя: ${name}\nТелефон: ${phone}\nСообщение: ${message}`;
+            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=${encodeURIComponent(text)}`;
+
+            try {
+                const res = await fetch(url);
+                if (res.ok) {
+                    alert('Заявка отправлена! Скоро с вами свяжутся.');
+                    closeModal();
+                    this.reset();
+                } else {
+                    alert('Ошибка отправки. Попробуйте позже.');
+                }
+            } catch (err) {
+                alert('Нет интернета или ошибка сервера.');
+            }
+        });
+
+        // Отзывы
         const reviewsList = document.getElementById('reviewsList');
         const reviewForm = document.getElementById('reviewForm');
-
         function loadReviews() {
             const reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
             reviewsList.innerHTML = '';
@@ -681,11 +420,10 @@
                 reviewsList.appendChild(div);
             });
         }
-
         reviewForm.addEventListener('submit', e => {
             e.preventDefault();
-            const name = reviewForm.name.value;
-            const text = reviewForm.text.value;
+            const name = reviewForm.reviewName.value;
+            const text = reviewForm.reviewText.value;
             const date = new Date().toLocaleDateString('ru');
             const reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
             reviews.push({ name, text, date });
@@ -693,11 +431,12 @@
             reviewForm.reset();
             loadReviews();
         });
+        loadReviews();
 
-        // Yandex Map
+        // Яндекс.Карта
         ymaps.ready(() => {
             const map = new ymaps.Map('yandexMap', {
-                center: [55.7558, 37.6176], // Москва, поменяй на свой город
+                center: [55.7558, 37.6176], // ← Замени на свой город!
                 zoom: 15
             });
             const placemark = new ymaps.Placemark([55.7558, 37.6176], {
@@ -706,9 +445,6 @@
             });
             map.geoObjects.add(placemark);
         });
-
-        // Load reviews on start
-        loadReviews();
     </script>
 </body>
 </html>
